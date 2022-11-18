@@ -1,21 +1,28 @@
 import NotificationButton from "../NotificationButton";
 import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import pt from "date-fns/locale/pt-BR";
+registerLocale('pt', pt)
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
+import { useState } from "react";
 
 function SalesCard() {
+  const [minDate, setMinDate] = useState(new Date(new Date().setDate(new Date().getDate() - 365)));
+  const [maxDate, setMaxDate] = useState(new Date());
+
   return (
     <div className="main-card">
       <h2 className="main-sales-title">Vendas</h2>
       <div>
         <div className="main-form-control-container">
-          <DatePicker selected={new Date()} onChange={(date: Date) => {}} className="main-form-control" 
-            dateFormat="dd/MM/yyyy" />
+          <DatePicker selected={minDate} onChange={(date: Date) => setMinDate(date)} className="main-form-control" 
+            dateFormat="dd/MM/yyyy" locale="pt" />
         </div>
         <div className="main-form-control-container">
-          <DatePicker selected={new Date()} onChange={(date: Date) => {}} className="main-form-control" 
-            dateFormat="dd/MM/yyyy" />
+          <DatePicker selected={maxDate} onChange={(date: Date) => setMaxDate(date)} className="main-form-control" 
+            dateFormat="dd/MM/yyyy" locale="pt" />
         </div>
       </div>
 
